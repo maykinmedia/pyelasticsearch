@@ -30,8 +30,8 @@ class IndexingTestCase(ElasticSearchTestCase):
 
     def test_indexing_with_unicode(self):
         """Test unicode field values and path components."""
-        unicode_name = u'Jöe Téster'
-        unicode_id = u'smöö'
+        unicode_name = 'Jöe Téster'
+        unicode_id = 'smöö'
         result = self.conn.index('test-index', 'test-type', {'name': unicode_name}, id=unicode_id)
         self.assert_result_contains(result, {'_type': 'test-type', '_id': unicode_id, 'ok': True, '_index': 'test-index'})
 
@@ -287,7 +287,7 @@ class IndexingTestCase(ElasticSearchTestCase):
         }
         self.conn.update_aliases(settings)
         result = self.conn.aliases('test-index')
-        eq_(result, {u'test-index': {u'aliases': {u'test-alias': {}}}})
+        eq_(result, {'test-index': {'aliases': {'test-alias': {}}}})
 
     def test_empty_path_segments(self):
         """'' segments passed to ``_join_path`` should be omitted."""
@@ -434,7 +434,7 @@ class SearchTestCase(ElasticSearchTestCase):
 
         result = self.conn.more_like_this('test-index', 'test-type', 3, ['sport'], min_term_freq=1, min_doc_freq=1)
         self.assert_result_contains(result,
-                {u'hits': {u'hits': [{u'_score': 0.30685282, u'_type': u'test-type', u'_id': u'4', u'_source': {u'sport': u'football', u'name': u'Cam'}, u'_index': u'test-index'}], u'total': 1, u'max_score': 0.30685282}})
+                {'hits': {'hits': [{'_score': 0.30685282, '_type': 'test-type', '_id': '4', '_source': {'sport': 'football', 'name': 'Cam'}, '_index': 'test-index'}], 'total': 1, 'max_score': 0.30685282}})
 
 
 class DangerousOperationTests(ElasticSearchTestCase):

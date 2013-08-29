@@ -35,8 +35,8 @@ class JsonTests(ElasticSearchTestCase):
 
     def test_encoding(self):
         """Test encoding a zillion other types."""
-        eq_(self.conn._encode_json('abc'), u'"abc"')
-        eq_(self.conn._encode_json(u'☃'), r'"\u2603"')
+        eq_(self.conn._encode_json('abc'), '"abc"')
+        eq_(self.conn._encode_json('☃'), r'"\u2603"')
         eq_(self.conn._encode_json(123), '123')
         eq_(self.conn._encode_json(12.25), '12.25')
         eq_(self.conn._encode_json(True), 'true')

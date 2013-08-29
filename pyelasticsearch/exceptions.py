@@ -23,7 +23,7 @@ class ElasticHttpError(Exception):
         return self.args[1]
 
     def __unicode__(self):
-        return u'Non-OK response returned (%d): %r' % (self.status_code,
+        return 'Non-OK response returned (%d): %r' % (self.status_code,
                                                        self.error)
 
 
@@ -44,4 +44,4 @@ class InvalidJsonResponseError(Exception):
         return self.args[0]
 
     def __unicode__(self):
-        return u'Invalid JSON returned from ES: %r' % (self.response,)
+        return 'Invalid JSON returned from ES: %r' % (self.response,)
